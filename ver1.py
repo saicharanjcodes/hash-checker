@@ -3,11 +3,12 @@ import hashlib
 def hash_cal(option):
 
     if option == 1:
-   
-        cal_file_path_sha = input("Enter file path: ")
-        cal_file = open(cal_file_path_sha, "rb")
 
-        cal_hash_sha = hashlib.file_digest(cal_file, "sha256").hexdigest()
+        cal_file_path_sha = input("Enter file path: ")
+
+        with open(cal_file_path_sha, "rb") as cal_file:
+            cal_hash_sha = hashlib.file_digest(cal_file, "sha256").hexdigest()
+
         print("")
         print("Your sha256 hash is:")
         print("")
@@ -16,9 +17,10 @@ def hash_cal(option):
 
     elif option == 2:
         cal_file_path_md = input("Enter file path: ")
-        cal_file_md = open(cal_file_path_md, "rb")
 
-        cal_hash_md = hashlib.file_digest(cal_file_md, "md5").hexdigest()
+        with open(cal_file_path_md, "rb") as cal_file_md:
+            cal_hash_md = hashlib.file_digest(cal_file_md, "md5").hexdigest()
+
         print("")
         print("Your MD5 hash is:")
         print("")
@@ -29,14 +31,16 @@ def hash_cal(option):
         print("Invalid option")
         return
 
+
 def hash_verify(option2):
-    
+
     if option2 == 1:
 
         cal_file_path_sha = input("Enter file path: ")
-        cal_file = open(cal_file_path_sha, "rb")
 
-        cal_hash_sha = hashlib.file_digest(cal_file, "sha256").hexdigest()
+        with open(cal_file_path_sha, "rb") as cal_file:
+            cal_hash_sha = hashlib.file_digest(cal_file, "sha256").hexdigest()
+
         print("")
         user_hash_sha = input("Enter hash: ")
         print("")
@@ -52,9 +56,10 @@ def hash_verify(option2):
 
     elif option2 == 2:
         cal_file_path_md = input("Enter file path: ")
-        cal_file_md = open(cal_file_path_md, "rb")
 
-        cal_hash_md = hashlib.file_digest(cal_file_md, "md5").hexdigest()
+        with open(cal_file_path_md, "rb") as cal_file_md:
+            cal_hash_md = hashlib.file_digest(cal_file_md, "md5").hexdigest()
+
         print("")
         user_hash_md = input("Enter hash: ")
         print("")
@@ -82,7 +87,7 @@ while True:
     print("3.exit")
 
     choice = int(input("Enter your choice(1,2 or 3): "))
-    
+
     if choice == 1:
         print("Choose algorithm")
         print("1.sha256")
@@ -101,9 +106,5 @@ while True:
         subchoice2 = int(input("Enter you choice(1 or 2):"))
         hash_verify(subchoice2)
 
-    elif choice == 3:
-        print("Exiting......................")
-        break
-    
     else:
         print("Invalid option")
